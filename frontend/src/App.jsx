@@ -13,6 +13,8 @@ import Prescriptions from "./pages/Prescriptions.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import RoleRoute from "./components/RoleRoute.jsx";
 import { Container } from "react-bootstrap";
+import DoctorHome from "./pages/DoctorHome.jsx";
+import DoctorLabCreate from "./pages/DoctorLabCreate.jsx";
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
         <Header />
         <main className="flex-fill container-fluid mt-4">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<PrivateRoute />}>
@@ -32,6 +34,11 @@ function App() {
                 <Route path="/consultations" element={<Consultations />} />
                 <Route path="/examinations" element={<Examinations />} />
                 <Route path="/prescriptions" element={<Prescriptions />} />
+              </Route>
+
+              <Route element={<RoleRoute allowedRoles={["Doctor"]} />}>
+                <Route path="/doctor" element={<DoctorHome />} />
+                <Route path="/doctor/laboratory/create" element={<DoctorLabCreate />} />
               </Route>
             </Route>
           </Routes>
