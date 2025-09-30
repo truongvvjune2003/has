@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   },
   fullName: {
     type: String,
-    required:true,
+    required: true,
     trim: true,
     minlength: [1, "Full name must have at least 1 character"],
     maxlength: [100, "Full name must not exceed 100 characters"],
@@ -51,6 +51,10 @@ const userSchema = new mongoose.Schema({
   specialization: {
     type: String
   }, // chỉ Doctor
+  emailVerified: {
+    type: Boolean,
+    default: false
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);
