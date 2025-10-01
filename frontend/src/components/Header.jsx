@@ -7,9 +7,9 @@ function Header() {
       <Container>
         <Navbar.Brand as={Link} to="/">Healthcare</Navbar.Brand>
         <Nav className="ms-auto">
-          <Nav.Link as={Link} to="/appointments">Check Appointment</Nav.Link>
-          <Nav.Link as={Link} to="/login">Login</Nav.Link>
-          <Nav.Link as={Link} to="/register">Register</Nav.Link>
+          <Nav.Link as={Link} to="/appointments">Kiểm tra cuộc hẹn</Nav.Link>
+          <Nav.Link as={Link} to="/login">Đăng nhập</Nav.Link>
+          <Nav.Link as={Link} to="/register">Đăng ký</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

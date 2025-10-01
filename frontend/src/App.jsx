@@ -23,7 +23,7 @@ function App() {
         <Header />
         <main className="flex-fill container-fluid mt-4">
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<PrivateRoute />}>

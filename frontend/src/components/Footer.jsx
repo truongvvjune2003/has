@@ -12,23 +12,22 @@ function Footer() {
           <Col xs={6} md={4}>
             <h6 className="mb-3">Liên kết nhanh</h6>
             <ul className="list-unstyled mb-0">
-              <li><a className="text-decoration-none text-light" href="/appointments">Check Appointment</a></li>
-              <li><a className="text-decoration-none text-light" href="/login">Login</a></li>
-              <li><a className="text-decoration-none text-light" href="/register">Register</a></li>
+              <li><a className="text-decoration-none text-light" href="/appointments">Kiểm tra cuộc hẹn</a></li>
+              <li><a className="text-decoration-none text-light" href="/login">Đăng nhập</a></li>
+              <li><a className="text-decoration-none text-light" href="/register">Đăng ký</a></li>
             </ul>
           </Col>
           <Col xs={6} md={4}>
             <h6 className="mb-3">Liên hệ</h6>
             <ul className="list-unstyled mb-0">
               <li>Email: truongvvjune2003@gmail.com</li>
-              <li>Hotline: 0865537918</li>
+              <li>Số điện thoại: 0865537918</li>
             </ul>
           </Col>
         </Row>
         <hr className="border-secondary my-3" />
-        <div className="d-flex justify-content-between align-items-center pb-3">
+        <div className="d-flex justify-content-center align-items-center pb-3">
           <small>© 2025 Healthcare Appointment System</small>
-          <small>All rights reserved</small>
         </div>
       </Container>
     </footer>
