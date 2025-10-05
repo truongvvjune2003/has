@@ -1,5 +1,5 @@
 const express = require("express");
-const { login, register, me, refreshToken, logout } = require("../controllers/auth.controller");
+const { login, register, me, refreshToken, logout, updateProfile, changePassword } = require("../controllers/auth.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 
 const router = express.Router();
@@ -9,5 +9,7 @@ router.post("/register", register);
 router.post("/refresh-token", refreshToken);
 router.post("/logout", logout);
 router.get("/me", authMiddleware, me);
+router.patch("/me", authMiddleware, updateProfile);
+router.put("/change-password", authMiddleware, changePassword);
 
 module.exports = router;

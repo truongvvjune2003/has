@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import api from "../lib/api";
+import { getMyConsultations } from "../lib/patient";
+import { Table, Typography, Alert } from "antd";
 
 export default function Consultations() {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   useEffect(() => {
-    api.get("/patient/consultations/history").then(res => setItems(res.data.data || [])).catch(() => {});
+    getMyConsultations().then(setItems).catch(() => setError("Không tải được dữ liệu")).finally(() => setLoading(false));
   }, []);
+  const columns = [
+    { title: 'Bác sĩ', dataIndex: ['doctorId','fullName'], key: 'doctor' },
+    { title: 'Trạng thái', dataIndex: 'status', key: 'status' },
+    { title: 'Cuộc hẹn', dataIndex: ['appointmentId','_id'], key: 'appointment' },
+  ];
   return (
     <div>
-      <h3>Lịch sử khám</h3>
-      <ul>
-        {items.map(c => (
-          <li key={c._id}>{c?.doctorId?.fullName} - {c.status}</li>
-        ))}
-      </ul>
+      <Typography.Title level={3}>Lịch sử khám</Typography.Title>
+      {error && <Alert type="error" message={error} showIcon className="mb-2" />}
+      <Table rowKey="_id" loading={loading} columns={columns} dataSource={items} pagination={{ pageSize: 10 }} />
     </div>
   );
 }
