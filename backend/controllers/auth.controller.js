@@ -72,5 +72,53 @@ const logout = (req, res) => {
   res.json({ message: "Đã logout" });
 };
 
-module.exports = { login, register, me, refreshToken, logout };
+
+const updateProfile = async (req, res) => {
+  try {
+    const allowed = [
+      "fullName",
+      "dateOfBirth",
+      "gender",
+      "phone",
+      "address",
+      "specialization",
+      "avatar"
+    ];
+    const updates = {};
+    allowed.forEach((k) => {
+      if (typeof req.body[k] !== "undefined") updates[k] = req.body[k];
+    });
+
+    const user = await User.findByIdAndUpdate(req.user.id, updates, {
+      new: true,
+      runValidators: true,
+      select: "-password"
+    });
+    if (!user) return res.status(404).json({ success: false, message: "Không tìm thấy người dùng" });
+    res.json({ success: true, data: user });
+  } catch (e) {
+    res.status(500).json({ success: false, message: "Lỗi server" });
+  }
+};
+
+
+const changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ success: false, message: "Thiếu thông tin mật khẩu" });
+    }
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ success: false, message: "Không tìm thấy người dùng" });
+    const match = await bcrypt.compare(currentPassword, user.password);
+    if (!match) return res.status(400).json({ success: false, message: "Mật khẩu hiện tại không đúng" });
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+    res.json({ success: true, message: "Đổi mật khẩu thành công" });
+  } catch (e) {
+    res.status(500).json({ success: false, message: "Lỗi server" });
+  }
+};
+
+module.exports = { login, register, me, refreshToken, logout, updateProfile, changePassword };
  

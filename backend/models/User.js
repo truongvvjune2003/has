@@ -51,6 +51,10 @@ const userSchema = new mongoose.Schema({
   specialization: {
     type: String
   }, // chỉ Doctor
+  avatar: {
+    type: String, // URL ảnh đại diện
+    default: ""
+  },
   emailVerified: {
     type: Boolean,
     default: false

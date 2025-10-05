@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
-import api from "../lib/api";
+import { getMyAppointments } from "../lib/patient";
 
 export default function Appointments() {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   useEffect(() => {
-    api.get("/patient/appointments/my").then(res => setItems(res.data.data || [])).catch(() => {});
+    getMyAppointments().then(setItems).catch(() => setError("Không tải được dữ liệu"))
+      .finally(() => setLoading(false));
   }, []);
   return (
     <div>
       <h3>Lịch đã đặt</h3>
-      <ul>
-        {items.map(a => (
-          <li key={a._id}>{new Date(a.date).toLocaleString()} - {a?.doctorId?.fullName} - {a.status}</li>
-        ))}
-      </ul>
+      {loading && <div>Đang tải...</div>}
+      {error && <div className="text-danger">{error}</div>}
+      {!loading && !error && items.length === 0 && <div>Không có dữ liệu</div>}
+      {!loading && !error && items.length > 0 && (
+        <ul>
+          {items.map(a => (
+            <li key={a._id}>{new Date(a.date).toLocaleString()} - {a?.doctorId?.fullName} - {a.status}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
