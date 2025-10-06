@@ -1,37 +1,56 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Layout, Row, Col, Typography, Divider } from "antd";
 
-function Footer() {
+const { Footer: AntFooter } = Layout;
+const { Title, Text, Link, Paragraph } = Typography;
+
+export default function Footer() {
   return (
-    <footer className="bg-dark text-light mt-auto pt-4">
-      <Container>
-        <Row className="gy-3">
-          <Col xs={12} md={4}>
-            <h5 className="mb-3">Healthcare</h5>
-            <p className="mb-0">Hệ thống đặt lịch khám và quản lý hồ sơ y tế.</p>
-          </Col>
-          <Col xs={6} md={4}>
-            <h6 className="mb-3">Liên kết nhanh</h6>
-            <ul className="list-unstyled mb-0">
-              <li><a className="text-decoration-none text-light" href="/appointments">Kiểm tra cuộc hẹn</a></li>
-              <li><a className="text-decoration-none text-light" href="/login">Đăng nhập</a></li>
-              <li><a className="text-decoration-none text-light" href="/register">Đăng ký</a></li>
-            </ul>
-          </Col>
-          <Col xs={6} md={4}>
-            <h6 className="mb-3">Liên hệ</h6>
-            <ul className="list-unstyled mb-0">
-              <li>Email: truongvvjune2003@gmail.com</li>
-              <li>Số điện thoại: 0865537918</li>
-            </ul>
-          </Col>
-        </Row>
-        <hr className="border-secondary my-3" />
-        <div className="d-flex justify-content-center align-items-center pb-3">
-          <small>© 2025 Healthcare Appointment System</small>
-        </div>
-      </Container>
-    </footer>
+    <AntFooter
+      style={{
+        background: "#001529",
+        color: "#fff",
+        padding: "40px 24px",
+      }}
+    >
+      <Row gutter={[24, 24]}>
+        <Col xs={24} md={8}>
+          <Title level={5} style={{ color: "#fff", marginBottom: 12 }}>
+            Healthcare
+          </Title>
+          <Paragraph style={{ color: "rgba(255,255,255,0.85)", marginBottom: 0 }}>
+            Hệ thống đặt lịch khám và quản lý hồ sơ y tế.
+          </Paragraph>
+        </Col>
+
+        <Col xs={12} md={8}>
+          <Title level={6} style={{ color: "#fff", marginBottom: 12 }}>
+            Liên kết nhanh
+          </Title>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <li><Link href="/appointments">Kiểm tra cuộc hẹn</Link></li>
+            <li><Link href="/login">Đăng nhập</Link></li>
+            <li><Link href="/register">Đăng ký</Link></li>
+          </ul>
+        </Col>
+
+        <Col xs={12} md={8}>
+          <Title level={6} style={{ color: "#fff", marginBottom: 12 }}>
+            Liên hệ
+          </Title>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <li><Text style={{ color: "#fff" }}>Email: truongvvjune2003@gmail.com</Text></li>
+            <li><Text style={{ color: "#fff" }}>Số điện thoại: 0865537918</Text></li>
+          </ul>
+        </Col>
+      </Row>
+
+      <Divider style={{ borderColor: "rgba(255,255,255,0.15)", margin: "24px 0" }} />
+
+      <div style={{ textAlign: "center" }}>
+        <small style={{ color: "rgba(255,255,255,0.65)" }}>
+          © 2025 Healthcare Appointment System
+        </small>
+      </div>
+    </AntFooter>
   );
 }
-
-export default Footer;

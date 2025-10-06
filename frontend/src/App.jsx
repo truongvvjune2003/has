@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
+import Header from "./components/Header.jsx";     
+import Footer from "./components/Footer.jsx";     
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -12,22 +12,25 @@ import Examinations from "./pages/Examinations.jsx";
 import Prescriptions from "./pages/Prescriptions.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import RoleRoute from "./components/RoleRoute.jsx";
-import { Container } from "react-bootstrap";
 import DoctorHome from "./pages/DoctorHome.jsx";
 import DoctorLabCreate from "./pages/DoctorLabCreate.jsx";
+
+import { Layout } from "antd";
+const { Content } = Layout;
 
 function App() {
   return (
     <Router>
-      <div className="d-flex flex-column min-vh-100">
+      <Layout style={{ minHeight: "100vh" }}>
         <Header />
-        <main className="flex-fill container-fluid mt-4">
+
+        <Content style={{ padding: 24 }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route element={<PrivateRoute />}>
 
+            <Route element={<PrivateRoute />}>
               <Route element={<RoleRoute allowedRoles={["Patient"]} />}>
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/appointments" element={<Appointments />} />
@@ -42,9 +45,9 @@ function App() {
               </Route>
             </Route>
           </Routes>
-        </main>
+        </Content>
         <Footer />
-      </div>
+      </Layout>
     </Router>
   );
 }
